@@ -15,6 +15,8 @@ RADIO_DEVICE = '/dev/ttyACM0'
 
 # Global variable to hold the Radio object
 radio = None
+premute_volume = 10
+muted = False
 
 # Setup the application
 app = Flask(__name__)
@@ -40,8 +42,25 @@ def get_radio():
 # Pre-request setup
 @app.before_request
 def before_request():
+	global premute_volume
+	global muted
+
 	g.radio = get_radio()
+	g.premute_volume = premute_volume
+	g.muted = muted
+
+@app.after_request
+def after_request(response):
+# *** THIS IS NOT THREAD/REQUEST SAFE ***
+	global premute_volume
+	global muted
+
+	premute_volume = g.premute_volume
+	muted = g.muted
+	print (str(muted) + " : " + str(premute_volume))
+	return response
 		
 
 if __name__ == '__main__':
-	app.run(host='0.0.0.0')
+#	app.run(host='0.0.0.0')
+	app.run(host='0.0.0.0', debug=True)
