@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>DAB Radio</title>
+        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='style.css')}}">
+        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='bs/css/bootstrap.min.css')}}">
+        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='bs/css/bootstrap-theme.min.css')}}">
+        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='slider/css/slider.css')}}">
+        <script src="{{ url_for('static', filename='jq/js/jquery-1.11.3.min.js')}}"></script>
+        <!-- This one currently dows not show the slider -->
+        <!-- 
+        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='slider/css/bootstrap-slider.min.css')}}">
+        <script src="{{ url_for('static', filename='slider/js/bootstrap-slider-2.js')}}"></script>
+        -->
+        <!-- Thhis one below works, but has been superceeded -->
+        <script src="{{ url_for('static', filename='bs/js/bootstrap.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='slider/js/bootstrap-slider.js')}}"></script>
+        <script src="{{ url_for('static', filename='script.js')}}"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2" id="power"><h1>Power</h1></div>
+                <div class="col-md-8 text-center" id="channel"><h1>Channel</h1></div>
+                <div class="col-md-2" id="time"><h1>time</h1></div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" id="info">Info</div>
+            </div>
+            <div class="row">
+                <div class="col-md-10" id="text">
+                    <div id="now-playing">Now Playing</div>
+                </div>
+                <div class="col-md-2" id="signal">Signal</div>
+            </div>
+        </div>
+        <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2" id="mute"></div>
+                <div class="col-md-8 text-center" >
+                    <input type="text" id="volume" />
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+        </footer>
+    </body>
+</html>
