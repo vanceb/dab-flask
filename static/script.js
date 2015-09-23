@@ -19,10 +19,11 @@ $(document).ready( function () {
     // Regularly update the signal parameters
     setInterval(function() {
         $.get("info", function(data) {
+            data = data.info
             $("#channel").html("<h1>" + data.channel + "</h1>")
             $("#signal").html("<p> Signal Strength: " + data.signal_strength +"</p>" +
-                            "<p> Signal Quality: " + data.signal_quality + "</p>" +
-                            "<p> Data Rate: " + data.data_rate + "</p>" +
+                            "<p> Signal Quality: " + data.dab_quality + "</p>" +
+                            "<p> Data Rate: " + data.datarate + "</p>" +
                             "<p> Stereo: " + data.stereo + "</p>"
                            );
             $volume.slider('setValue', data.volume);
