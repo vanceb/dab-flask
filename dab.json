@@ -1,1 +1,1 @@
-{"radioDevice": "/dev/ttyACM0", "volume": 10, "stereo": false, "station": 26, "npRegex": "Now Playing: (.*)"}
+{"radioDevice": "/dev/ttyACM0", "volume": 14, "stereo": true, "station": 26, "npRegex": "Now Playing: (.*)"}

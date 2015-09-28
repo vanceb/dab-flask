@@ -1,6 +1,5 @@
 $(document).ready( function () {
-    var now_playing = [];
-    var prog_info = [];
+    // Volume
     $("#volume").slider({
         orientation: "horizontal",
         max: 16,
@@ -11,57 +10,62 @@ $(document).ready( function () {
     $volume = $("#volume").on('slideStop', function (ev) {
         $.post('/volume/' + ev.value);
     });
-    $("#channel").click( function () {
-        $.post('channel/25', function (data) {
-            $("#channel").html("<h1>" + data.channel + "</h1>")
-        });
+    // Channel
+    // Change Channel
+    $('#tab-channels').on('click', '.channel', function(event) {
+        var x = $( this ).text();
+        $.post('/channel/' + x);
     });
+    //
     // Regularly update the signal parameters
     setInterval(function() {
         $.get("info", function(data) {
             data = data.info
-            $("#channel").html("<h1>" + data.channel + "</h1>")
-            $("#signal").html("<p> Signal Strength: " + data.signal_strength +"</p>" +
+            $("#current-channel").html('<p class="h1">' + data.channel + '</p>')
+            $("#tab-signal").html("<p> Signal Strength: " + data.signal_strength +"</p>" +
                             "<p> Signal Quality: " + data.dab_quality + "</p>" +
                             "<p> Data Rate: " + data.datarate + "</p>" +
                             "<p> Stereo: " + data.stereo + "</p>"
                            );
             $volume.slider('setValue', data.volume);
+            $cl = $("#tab-channel");
+            $cl.empty();
+            var clist=""
+            for (i in data.channels){
+                clist = clist + '<p><a class="channel" href="#">' + i + '</a></p>';
+            }
+            $("#tab-channels").html(clist)
         });
     }, 5000);
 
+
     // Regularly update the text
     setInterval(function() {
-        $.get("text", function(data) {
-            txt = data.text;
-            if (txt != null){
-                var npre = /Now Playing:\s+(.*)/g;
-                var hit = npre.exec(txt);
-                if (hit != null && hit.length > 0){
-                    np = [hit[1]];
-                    if(np != now_playing[0]){
-                        now_playing = np.concat(now_playing);
-                        np_html = "<h3>" + np + "</h3>"
-                        for (i=1; i<5 && i < now_playing.length; i++){
-                            np_html = np_html + " <p>" + now_playing[i] + "</p>"
-                        }
-                        $("#now-playing").html(np_html);
-                    }
+        $.get("nowplaying", function(data) {
+            text = data.text;
+            np = "";
+            for(i = 0; i < text.length; i++){
+                if(i == 0){
+                    np += '<p class="lead">' + text[i] + '</p>';
+                    $("#current-track").html('<p class="lead"><span class="glyphicon glyphicon-music"> </span>' + ' ' +  text[i] + '</p>')
                 } else {
-                    now = new Date();
-                    pi_html = "<h3>" + txt + "</h3>";
-                    delete prog_info[txt]
-                    for (var key in prog_info){
-                        if(now - prog_info[key] > 300000) {
-                            delete prog_info[key]
-                        } else {
-                            pi_html = pi_html + "<p>" + key + "</p>"
-                        }
-                    }
-                    prog_info[txt] = now;
-                    $("#info").html(pi_html);
+                    np += '<p>' + text[i] + '</p>';
                 }
             }
+            $("#tab-playlist").html(np);
+        });
+        $.get("text", function(data) {
+            text = data.text;
+            txt = "";
+            for(i = 0; i < text.length; i++){
+                if(i ==0){
+                    txt += '<p class="lead">' + text[i] + '</p>';
+                    $("#current-info").html('<p class="lead"><span class="glyphicon glyphicon-info-sign"></span>' + ' ' + text[i] + '</p>')
+                } else {
+                    txt += '<p>' + text[i] + '</p>';
+                }
+            }
+            $("#tab-info").html(txt);
         });
     }, 5000);
 

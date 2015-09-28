@@ -29,9 +29,9 @@ def channels():
     return jsonify({'channels': g.radio.channels})
 
 @dab.route('/channel', methods=['GET'], defaults={'cnum': None})
-@dab.route('/channel/<int:cnum>', methods=['PUT', 'POST'])
-@dab.route('/channel/<cname>', methods=['PUT', 'POST'])
-def set_channel_by_index(cnum):
+@dab.route('/channel/<int:cnum>', methods=['PUT', 'POST'], defaults={'cname': None})
+@dab.route('/channel/<cname>', methods=['PUT', 'POST'], defaults={'cnum': None})
+def set_channel(cnum, cname):
     # Set the channel if appropriate
     if request.method == 'POST' or request.method == 'PUT':
         if cnum != None:
@@ -120,4 +120,4 @@ def status():
 
 @dab.route('/datarate', methods=['GET'])
 def datarate():
-    return jsonify({'datarate': g.radio.datarate})
+    return jsonify({'datarate': g.radio.datarate()})

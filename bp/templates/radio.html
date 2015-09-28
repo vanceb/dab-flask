@@ -5,8 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>DAB Radio</title>
         <link rel=stylesheet text=text/css href="{{ url_for('static', filename='style.css')}}">
-        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='bs/css/bootstrap.min.css')}}">
-        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='bs/css/bootstrap-theme.min.css')}}">
+        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
+        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='css/bootstrap-theme.min.css')}}">
         <link rel=stylesheet text=text/css href="{{ url_for('static', filename='slider/css/slider.css')}}">
         <script src="{{ url_for('static', filename='jq/js/jquery-1.11.3.min.js')}}"></script>
         <!-- This one currently dows not show the slider -->
@@ -15,23 +15,30 @@
         <script src="{{ url_for('static', filename='slider/js/bootstrap-slider-2.js')}}"></script>
         -->
         <!-- Thhis one below works, but has been superceeded -->
-        <script src="{{ url_for('static', filename='bs/js/bootstrap.min.js')}}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
         <script src="{{ url_for('static', filename='slider/js/bootstrap-slider.js')}}"></script>
         <script src="{{ url_for('static', filename='script.js')}}"></script>
     </head>
     <body>
         <div class="container">
-            <div class="row">
-                <div class="col-md-2" id="power"><h1>Power</h1></div>
-                <div class="col-md-8 text-center" id="channel"><h1>Channel</h1></div>
-                <div class="col-md-2" id="time"><h1>time</h1></div>
+            <div class="jumbotron">
+                <div id="current-channel"></div>
+                <div id="current-info"></div>
+                <div id="current-track"></div>
             </div>
             <div class="row">
-                <div class="col-md-10" id="text">
-                        <div class="col-md-10" id="info"> </div>
-                        <div class="col-md-10" id="now-playing"> </div>
-                </div>
-                <div class="col-md-2" id="signal">Signal</div>
+                <ul class="nav nav-pills" id="menu">
+                    <li class="active"><a href="#tab-channels" data-toggle="tab">Channels</a></li>
+                    <li><a href="#tab-playlist" data-toggle="tab">Playlist</a></li>
+                    <li><a href="#tab-info" data-toggle="tab">Info</a></li>
+                    <li><a href="#tab-signal" data-toggle="tab">Signal</a></li>
+                </ul>
+            </div>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab-channels">channels</div>
+                <div class="tab-pane" id="tab-playlist">playlist</div>
+                <div class="tab-pane" id="tab-info">info</div>
+                <div class="tab-pane" id="tab-signal">signal</div>
             </div>
         </div>
         <footer class="footer">
