@@ -1,4 +1,5 @@
 import sys
+import logging
 from flask import Flask, g, request, redirect, url_for
 
 #from reverseproxy import ReverseProxied
@@ -7,6 +8,9 @@ from lib.dabRadio import DABRadio as DABRadio
 
 # Settings
 RADIO_DEVICE = '/dev/ttyACM0'
+
+# Get a logger
+logger = logging.getLogger(__name__)
 
 # Global variable to hold the Radio object
 radio = None
@@ -21,14 +25,14 @@ app.register_blueprint(dab)
 def get_radio():
 	global radio
 	if radio is None:
-		print("Trying to open radio on " + app.config['RADIO_DEVICE'])
+		logger.debug("Trying to open radio on " + app.config['RADIO_DEVICE'])
 		try:
 			radio = DABRadio(app.config['RADIO_DEVICE'])
 		except:
 			print ("Error opening Radio")
 			sys.exit(-1)
 	else:
-		print("Using existing radio")
+		logger.debug("Using existing radio")
 	return radio
 
 # Pre-request setup

@@ -16,7 +16,15 @@ $(document).ready( function () {
         var x = $( this ).text();
         $.post('/channel/' + x);
     });
-    //
+    // Change Channel
+    $('#tab-favorites').on('click', '.channel', function(event) {
+        var x = $( this ).text();
+        $.post('/channel/' + x);
+    });
+    // Manage favorites
+    $("#favorite").on("click", function(event) {
+        $.post('favorite/toggle')
+    });
     // Regularly update the signal parameters
     setInterval(function() {
         $.get("info", function(data) {
@@ -28,13 +36,23 @@ $(document).ready( function () {
                             "<p> Stereo: " + data.stereo + "</p>"
                            );
             $volume.slider('setValue', data.volume);
-            $cl = $("#tab-channel");
-            $cl.empty();
+            // Channel List
             var clist=""
             for (i in data.channels){
-                clist = clist + '<p><a class="channel" href="#">' + i + '</a></p>';
+                clist = clist + '<p class="channel lead">' + i + '</p>';
             }
-            $("#tab-channels").html(clist)
+            $("#tab-channels").html(clist);
+            // Favorites
+            clist=""
+            for (i in data.favorites){
+                clist = clist + '<p class="channel lead">' + data.favorites[i] + '</p>';
+            }
+            $("#tab-favorites").html(clist);
+            if(data.favorites.indexOf(data.channel) >= 0){
+                    $("#favorite").html('<p class="lead"><span class="glyphicon glyphicon-star"></span></p>');
+            } else {
+                    $("#favorite").html('<p class="lead"><span class="glyphicon glyphicon-star-empty"></span></p>');
+            }
         });
     }, 5000);
 

@@ -45,6 +45,12 @@ def set_channel(cnum, cname):
 def ensemble ():
     return jsonify({'ensemble': g.radio.ensemble})
 
+@dab.route('/favorite/toggle', methods=['POST'], defaults={'channel': None})
+@dab.route('/favorite/toggle/<channel>', methods=["POST"])
+def togglefavorite(channel):
+    g.radio.togglefavorite(channel)
+    return jsonify({'favorites': g.radio.favorites})
+
 #################################################
 # Volume related functions
 #################################################

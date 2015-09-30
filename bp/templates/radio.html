@@ -25,32 +25,28 @@
                 <div id="current-channel"></div>
                 <div id="current-info"></div>
                 <div id="current-track"></div>
+                <div id=controls>
+                    <div class="col-sm-2" id="favorite" ><span class="glyphicon glyphicon-star-empty"></span> </div>
+                    <div class="col-sm-8 text-centre"><input type="text" id="volume" /></div>
+                    <div class="col-sm-2" id="signal"></div>
+                </div>
             </div>
             <div class="row">
                 <ul class="nav nav-pills" id="menu">
-                    <li class="active"><a href="#tab-channels" data-toggle="tab">Channels</a></li>
-                    <li><a href="#tab-playlist" data-toggle="tab">Playlist</a></li>
-                    <li><a href="#tab-info" data-toggle="tab">Info</a></li>
-                    <li><a href="#tab-signal" data-toggle="tab">Signal</a></li>
+                    <li class="active"><a href="#tab-favorites" data-toggle="tab"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
+                    <li><a href="#tab-channels" data-toggle="tab"><span class="glyphicon glyphicon-list"></span> Channels</a></li>
+                    <li><a href="#tab-playlist" data-toggle="tab"><span class="glyphicon glyphicon-music"></span> Playlist</a></li>
+                    <li><a href="#tab-info" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
+                    <li><a href="#tab-signal" data-toggle="tab"><span class="glyphicon glyphicon-signal"></span> Signal</a></li>
                 </ul>
             </div>
             <div class="tab-content">
-                <div class="tab-pane active" id="tab-channels">channels</div>
-                <div class="tab-pane" id="tab-playlist">playlist</div>
-                <div class="tab-pane" id="tab-info">info</div>
-                <div class="tab-pane" id="tab-signal">signal</div>
+                <div class="tab-pane active" id="tab-favorites"></div>
+                <div class="tab-pane" id="tab-channels"></div>
+                <div class="tab-pane" id="tab-playlist"></div>
+                <div class="tab-pane" id="tab-info"></div>
+                <div class="tab-pane" id="tab-signal"></div>
             </div>
         </div>
-        <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-2" id="mute"></div>
-                <div class="col-md-8 text-center" >
-                    <input type="text" id="volume" />
-                </div>
-                <div class="col-md-2"></div>
-            </div>
-        </div>
-        </footer>
     </body>
 </html>

@@ -1,1 +1,1 @@
-{"radioDevice": "/dev/ttyACM0", "volume": 14, "stereo": true, "station": 26, "npRegex": "Now Playing: (.*)"}
+{"stereo": true, "radioDevice": "/dev/ttyACM0", "volume": 8, "station": 26, "npRegex": "Now Playing: (.*)", "favorites": ["BBC Radio 6Music"]}
