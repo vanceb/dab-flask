@@ -7,7 +7,8 @@
         <link rel=stylesheet text=text/css href="{{ url_for('static', filename='style.css')}}">
         <link rel=stylesheet text=text/css href="{{ url_for('static', filename='css/bootstrap.min.css')}}">
         <link rel=stylesheet text=text/css href="{{ url_for('static', filename='css/bootstrap-theme.min.css')}}">
-        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='slider/css/slider.css')}}">
+        <!-- <link rel=stylesheet text=text/css href="{{ url_for('static', filename='slider/css/slider.css')}}"> -->
+        <link rel=stylesheet text=text/css href="{{ url_for('static', filename='bootstrap-slider.min.css')}}">
         <script src="{{ url_for('static', filename='jq/js/jquery-1.11.3.min.js')}}"></script>
         <!-- This one currently dows not show the slider -->
         <!-- 
@@ -16,7 +17,8 @@
         -->
         <!-- Thhis one below works, but has been superceeded -->
         <script src="{{ url_for('static', filename='js/bootstrap.min.js')}}"></script>
-        <script src="{{ url_for('static', filename='slider/js/bootstrap-slider.js')}}"></script>
+        <script type='text/javascript' src="{{ url_for('static', filename='bootstrap-slider.min.js')}}"></script>
+        <!-- <script src="{{ url_for('static', filename='slider/js/bootstrap-slider.js')}}"></script> -->
         <script src="{{ url_for('static', filename='script.js')}}"></script>
     </head>
     <body>
@@ -26,18 +28,18 @@
                 <div id="current-info"></div>
                 <div id="current-track"></div>
                 <div id=controls>
-                    <div class="col-sm-2" id="favorite" ><span class="glyphicon glyphicon-star-empty"></span> </div>
-                    <div class="col-sm-8 text-centre"><input type="text" id="volume" /></div>
+                    <div class="col-sm-2" id="stereo" > </div>
+                    <div class="col-sm-8 text-centre"><input type="text" id="volume" style="width: 100%"></div>
                     <div class="col-sm-2" id="signal"></div>
                 </div>
             </div>
             <div class="row">
-                <ul class="nav nav-pills" id="menu">
-                    <li class="active"><a href="#tab-favorites" data-toggle="tab"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
-                    <li><a href="#tab-channels" data-toggle="tab"><span class="glyphicon glyphicon-list"></span> Channels</a></li>
-                    <li><a href="#tab-playlist" data-toggle="tab"><span class="glyphicon glyphicon-music"></span> Playlist</a></li>
-                    <li><a href="#tab-info" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
-                    <li><a href="#tab-signal" data-toggle="tab"><span class="glyphicon glyphicon-signal"></span> Signal</a></li>
+                <ul class="nav nav-pills nav-justified" id="menu">
+                    <li class="active lead"><a href="#tab-favorites" data-toggle="tab"><span class="glyphicon glyphicon-star"></span> Favorites</a></li>
+                    <li class="lead"><a href="#tab-channels" data-toggle="tab"><span class="glyphicon glyphicon-list"></span> Channels</a></li>
+                    <li class="lead"><a href="#tab-playlist" data-toggle="tab"><span class="glyphicon glyphicon-music"></span> Playlist</a></li>
+                    <li class="lead"><a href="#tab-info" data-toggle="tab"><span class="glyphicon glyphicon-info-sign"></span> Info</a></li>
+                    <li class="lead"><a href="#tab-signal" data-toggle="tab"><span class="glyphicon glyphicon-signal"></span> Signal</a></li>
                 </ul>
             </div>
             <div class="tab-content">

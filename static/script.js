@@ -22,18 +22,30 @@ $(document).ready( function () {
         $.post('/channel/' + x);
     });
     // Manage favorites
-    $("#favorite").on("click", function(event) {
+    $("#current-channel").on("click", function(event) {
         $.post('favorite/toggle')
     });
     // Regularly update the signal parameters
     setInterval(function() {
         $.get("info", function(data) {
             data = data.info
-            $("#current-channel").html('<p class="h1">' + data.channel + '</p>')
-            $("#tab-signal").html("<p> Signal Strength: " + data.signal_strength +"</p>" +
-                            "<p> Signal Quality: " + data.dab_quality + "</p>" +
-                            "<p> Data Rate: " + data.datarate + "</p>" +
-                            "<p> Stereo: " + data.stereo + "</p>"
+            if(data.favorites.indexOf(data.channel) >= 0){
+                    $("#current-channel").html('<p class="h1" id="favorite"><span class="glyphicon glyphicon-star"></span> ' + data.channel + '</p>');
+            } else {
+                    $("#current-channel").html('<p class="h1" id="favorite"><span class="glyphicon glyphicon-star-empty"></span> ' + data.channel + '</p>');
+            }
+            $("#signal").html("<p class='lead'><span class='glyphicon glyphicon-signal'></span> " + data.signal_strength + "dB</p>")
+            s= "<p class='lead'>";
+            if (data.stereo) {
+                s += "Stereo";
+            } else {
+                s += "Mono";
+            }
+            $("#stereo").html(s)
+            $("#tab-signal").html("<p class='lead'> Signal Strength: " + data.signal_strength +" dB</p>" +
+                            "<p class='lead'> Signal Quality: " + data.dab_quality + " %</p>" +
+                            "<p class='lead'> Data Rate: " + data.datarate + " kbps</p>" +
+                            "<p class='lead'> Stereo: " + data.stereo + "</p>"
                            );
             $volume.slider('setValue', data.volume);
             // Channel List
@@ -48,11 +60,6 @@ $(document).ready( function () {
                 clist = clist + '<p class="channel lead">' + data.favorites[i] + '</p>';
             }
             $("#tab-favorites").html(clist);
-            if(data.favorites.indexOf(data.channel) >= 0){
-                    $("#favorite").html('<p class="lead"><span class="glyphicon glyphicon-star"></span></p>');
-            } else {
-                    $("#favorite").html('<p class="lead"><span class="glyphicon glyphicon-star-empty"></span></p>');
-            }
         });
     }, 5000);
 
