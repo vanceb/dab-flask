@@ -1,0 +1,48 @@
+version: 1
+
+formatters:
+    simpleFormater:
+        format: '%(asctime)s - %(name)s - %(levelname)s: %(message)s'
+        datefmt: '%Y/%m/%d %H:%M:%S'
+
+handlers:
+    console:
+        class: logging.StreamHandler
+        formatter: simpleFormater
+        level: INFO
+        stream: ext://sys.stdout
+    file:
+        class : logging.FileHandler
+        formatter: simpleFormater
+        level: WARNING
+        filename: dab.log
+
+loggers:
+    lib.DABRadio:
+        level: INFO
+        handlers: [console, file]
+        propagate: no
+
+    keystone.radio:
+        level: INFO
+        handlers: [console, file]
+        propagate: no
+
+    keystone.program:
+        level: INFO
+        handlers: [console, file]
+        propagate: no
+
+    werkzeug:
+        level: WARNING
+        handlers: [console, file]
+        propagate: no
+
+    TxtThread:
+        level: INFO
+        handlers: [console, file]
+        propagate: no
+
+root:
+    level: WARNING
+    handlers: [console, file]

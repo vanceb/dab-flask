@@ -28,7 +28,7 @@ def info():
 def channels():
     return jsonify({'channels': g.radio.channels})
 
-@dab.route('/channel', methods=['GET'], defaults={'cnum': None})
+@dab.route('/channel', methods=['GET'], defaults={'cnum': None, 'cname': None})
 @dab.route('/channel/<int:cnum>', methods=['PUT', 'POST'], defaults={'cname': None})
 @dab.route('/channel/<cname>', methods=['PUT', 'POST'], defaults={'cnum': None})
 def set_channel(cnum, cname):
@@ -44,6 +44,10 @@ def set_channel(cnum, cname):
 @dab.route('/channel/ensemble', methods=['GET'])
 def ensemble ():
     return jsonify({'ensemble': g.radio.ensemble})
+
+@dab.route('/favorites')
+def favorites():
+    return jsonify({'favorites': g.radio.favorites})
 
 @dab.route('/favorite/toggle', methods=['POST'], defaults={'channel': None})
 @dab.route('/favorite/toggle/<channel>', methods=["POST"])
