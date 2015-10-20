@@ -6,7 +6,7 @@ from yaml import load
 
 #from reverseproxy import ReverseProxied
 from bp.dab import dab
-from lib.dabRadio import DABRadio as DABRadio
+from dab.dabRadio import DABRadio as DABRadio
 
 # Settings
 RADIO_DEVICE = '/dev/ttyACM0'
