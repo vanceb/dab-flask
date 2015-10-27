@@ -17,7 +17,10 @@ def radio():
 #################################################
 @dab.route('/info', methods={'GET'})
 def info():
-    return jsonify({"info": g.radio.status})
+    if g.radio is not None:
+        return jsonify({"info": g.radio.status})
+    else:
+        return jsonify({"info": None})
 
 
 #################################################
@@ -26,7 +29,10 @@ def info():
 
 @dab.route('/channels', methods=['GET'])
 def channels():
-    return jsonify({'channels': g.radio.channels})
+    if g.radio is not None:
+        return jsonify({'channels': g.radio.channels})
+    else:
+        return jsonify({'channels': [None]})
 
 @dab.route('/channel', methods=['GET'], defaults={'cnum': None, 'cname': None})
 @dab.route('/channel/<int:cnum>', methods=['PUT', 'POST'], defaults={'cname': None})

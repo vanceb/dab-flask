@@ -66,30 +66,31 @@ class RadioText(object):
 
     def add(self, text):
         self._lck.acquire()
-        self.logger.debug("Adding: " + text)
-        matched = False
-        if self.npRegex != None:
-            self.logger.debug("Checking for Now Playing match")
-            track = self.npRegex.match(text)
-            if track:
-                self.logger.debug("Matched the Now Playing regex")
-                matched = True
-                nowPlaying = track.group(1)
-                if len(self.np) == 0 or nowPlaying != self.np[0]:
-                    self.logger.info("Adding new Now Playing Track: " + nowPlaying)
-                    self.np = [nowPlaying] + self.np
+        if text != None:
+            self.logger.debug("Adding: " + text)
+            matched = False
+            if self.npRegex != None:
+                self.logger.debug("Checking for Now Playing match")
+                track = self.npRegex.match(text)
+                if track:
+                    self.logger.debug("Matched the Now Playing regex")
+                    matched = True
+                    nowPlaying = track.group(1)
+                    if len(self.np) == 0 or nowPlaying != self.np[0]:
+                        self.logger.info("Adding new Now Playing Track: " + nowPlaying)
+                        self.np = [nowPlaying] + self.np
+                    else:
+                        self.logger.debug("Already notified of this track: " + nowPlaying)
+            if not matched:
+                self.logger.debug("Adding to the messages")
+                if text in self.txt:
+                    self.logger.debug("Seen this message before, pushing to the top")
+                    # we have seen this message before
+                    self.txt_list.remove(text)
                 else:
-                    self.logger.debug("Already notified of this track: " + nowPlaying)
-        if not matched:
-            self.logger.debug("Adding to the messages")
-            if text in self.txt:
-                self.logger.debug("Seen this message before, pushing to the top")
-                # we have seen this message before
-                self.txt_list.remove(text)
-            else:
-                self.logger.info("New message: " + text)
-            self.txt[text] = dt.datetime.utcnow()
-            self.txt_list = [text] + self.txt_list
+                    self.logger.info("New message: " + text)
+                self.txt[text] = dt.datetime.utcnow()
+                self.txt_list = [text] + self.txt_list
 
         # Expire old messages
         t = dt.datetime.utcnow()
